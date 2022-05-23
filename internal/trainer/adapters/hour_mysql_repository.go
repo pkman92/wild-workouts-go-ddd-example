@@ -3,6 +3,7 @@ package adapters
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"os"
 	"time"
 
@@ -53,7 +54,7 @@ func (m MySQLHourRepository) getOrCreateHour(
 ) (*hour.Hour, error) {
 	dbHour := mysqlHour{}
 
-	query := "SELECT * FROM `hours` WHERE `hour` = ?"
+	query := fmt.Sprintf("SELECT * FROM `hours` WHERE `hour` = %s", dbHour)
 	if forUpdate {
 		query += " FOR UPDATE"
 	}
